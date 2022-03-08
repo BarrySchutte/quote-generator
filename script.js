@@ -28,9 +28,9 @@ function newQuote() {
     // Pick a random quote from apiQuotes array
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
 
-    // Check if Author fiels is blank and replace it with 'uknknow'
+    // Check if Author fiels is blank and replace it with 'Unknown'
     if (!quote.author) {
-        authorText.textContent = '- "Unknown"';
+        authorText.textContent = '- Unknown';
     } else {
         authorText.innerHTML = `- ${quote.author}`;
     }
