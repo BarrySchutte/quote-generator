@@ -1,5 +1,3 @@
-// import { localQuotes } from './quotes.js'; // To use Local Quotes
-
 const quoteContainer = document.getElementById('quote-container');
 const quoteText = document.getElementById('quote');
 const authorText = document.getElementById('author');
@@ -9,30 +7,28 @@ const loader = document.getElementById('loader');
 
 let apiQuotes = [];
 
-// Show Loading
-function loading() {
+function showLoadingSpinner() {
     loader.hidden = false;
     quoteContainer.hidden = true;
 }
 
-// Hide Loading
-function complete() {
+function hideLoadingSpinner() {
     quoteContainer.hidden = false;
     loader.hidden = true;
 }
 
 // Show New Quote
 function newQuote() {
-    loading();
+    showLoadingSpinner();
 
     // Pick a random quote from apiQuotes array
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
 
-    // Check if Author fiels is blank and replace it with 'Unknown'
+    // Check if Author field is blank and replace it with 'Unknown'
     if (!quote.author) {
         authorText.textContent = '- Unknown';
     } else {
-        authorText.innerHTML = `- ${quote.author}`;
+        authorText.textContent = `- ${quote.author}`;
     }
 
     // Check the Quote length to determine the styling
@@ -42,15 +38,15 @@ function newQuote() {
         quoteText.classList.remove('long-quote');
     }
 
-    // Set Quote, Hide Loader
+    // Set Quote text
     quoteText.textContent = quote.text;
 
-    complete();
+    hideLoadingSpinner();
 }
 
 // Get Quotes From API
 async function getQuotes() {
-    loading();
+    showLoadingSpinner();
 
     const apiUrl = 'https://type.fit/api/quotes';
 
@@ -59,7 +55,7 @@ async function getQuotes() {
         apiQuotes = await response.json();
         newQuote();
     } catch (error) {
-        // Catch Error Here
+        alert(error);
     }
 }
 
