@@ -30,7 +30,7 @@ function newQuote() {
 
     // Check if Author fiels is blank and replace it with 'uknknow'
     if (!quote.author) {
-        authorText.textContent = '"Unknown"';
+        authorText.textContent = '- "Unknown"';
     } else {
         authorText.innerHTML = `- ${quote.author}`;
     }
